@@ -56,6 +56,8 @@ Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'akinsho/toggleterm.nvim'
 
+Plugin 'integralist/vim-mypy'
+
 " UNCOMMENT THE REST OF THIS BLOCK ONLY AFTER INSTALLING ALL PLUGINS 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required for Vundle
@@ -124,7 +126,7 @@ map <c-l> :lclose<CR><c-w>l
 " nnoremap <C-H> <C-W><C-H>
 
 " vim-maximizer:
-nnoremap <leader>m :MaximizerToggle!<CR>
+" nnoremap <leader>m :MaximizerToggle!<CR>
 
 " NeoTerm
 " let g:neoterm_default_mod = 'vertical'
@@ -355,3 +357,15 @@ let g:airline_detect_spelllang=1
 let g:airline_detect_spell=1
 
 let g:vimspector_enable_mappings = 'HUMAN'
+
+" Copilot:
+" Disable automatic suggestions:
+" let g:copilot_enabled = v:false
+" Trigger copilot panel:
+" map <C-/> :Copilot<CR>
+" Trigger inline suggestion
+" imap <C-i> <M-Bslash>
+" Request next inline suggestion:
+" imap <C-n> <M-]>
+" Request previous inline suggestion:
+" imap <C-m> <M-[>
