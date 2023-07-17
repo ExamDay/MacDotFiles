@@ -6,3 +6,8 @@ In order:
 1. Install all the plugins by :PluginInstall
 1. Complete the second half of YouCompleteMe installation by following the directions on its Github.
 1. Maybe get github Copilot but that does cost money.
+
+- Optionally: set an alias in your .bashrc like
+  '''Bash
+  alias vim="nvim"
+  '''
