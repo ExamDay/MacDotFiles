@@ -1,6 +1,6 @@
 In order:
--Install Neovim
--Install Vundle the normal way (see the github)
--Install all the plugins by :PluginInstall
--Complete the second half of YouCompleteMe installation by following the directions on its Github.
--Maybe get github Copilot but that does cost money.
+1. Install Neovim
+1. Install Vundle the normal way (see the github)
+1. Install all the plugins by :PluginInstall
+1. Complete the second half of YouCompleteMe installation by following the directions on its Github.
+1. Maybe get github Copilot but that does cost money.
