@@ -8,6 +8,7 @@ In order:
 1. Maybe get github Copilot but that does cost money.
 
 - Optionally: set an alias in your .bashrc like
-  '''Bash
+  ```Bash
   alias vim="nvim"
-  '''
+  ```
+- If you are in a venv, go to open a file, and you see a complaint like "X not available / vim needs to be compiled with python version blah blah blah" just do pip3 install neovim inside the venv.
