@@ -2,6 +2,9 @@ let mapleader = " "
 set nocompatible              " required
 filetype off                  " required
 
+" " Use homebrew's clangd
+" let g:ycm_clangd_binary_path = trim(system('brew --prefix llvm')).'/bin/clangd'
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -11,11 +14,15 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-" Plugin 'tmhedberg/SimpylFold'
+
+Plugin 'git@github.com:coot/CRDispatcher.git'
+Plugin 'git@github.com:coot/EnchantedVim.git'
+
+Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'vim-syntastic/syntastic'
 " Plugin 'scrooloose/syntastic'
-Plugin 'dense-analysis/ale'
+" Plugin 'dense-analysis/ale'
 Plugin 'nvie/vim-flake8'
 Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
@@ -28,6 +35,10 @@ Plugin 'jistr/vim-nerdtree-tabs'
 " ^ just one nerdtree irrespective of tabs
 Plugin 'psf/black'
 Plugin 'preservim/nerdcommenter'
+
+" Plugin 'git@github.com:tabnine/YouCompleteMe.git'
+" Plugin 'codota/tabnine-vim'
+
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'prettier/vim-prettier'
@@ -35,8 +46,6 @@ Plugin 'tpope/vim-surround'
 Plugin 'tweekmonster/django-plus.vim'
 Plugin 'sukima/xmledit'
 Plugin 'glench/vim-jinja2-syntax'
-
-Plugin 'szw/vim-maximizer'
 
 "Google CodeFMT
 " Add maktaba and codefmt to the runtimepath.
@@ -49,15 +58,14 @@ Plugin 'google/vim-glaive'
 
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'junegunn/goyo.vim'
 
-Plugin 'puremourning/vimspector'
+" Plugin 'Valloric/YouCompleteMe'
+Plugin 'https://github.com/Valloric/YouCompleteMe.git'
 
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'akinsho/ToggleTerm.nvim'
 
-Plugin 'akinsho/toggleterm.nvim'
-
-Plugin 'integralist/vim-mypy'
-
+Plugin 'elubow/cql-vim'
 " UNCOMMENT THE REST OF THIS BLOCK ONLY AFTER INSTALLING ALL PLUGINS 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required for Vundle
@@ -76,9 +84,6 @@ call glaive#Install()
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" Use homebrew's clangd
-" let g:ycm_clangd_binary_path = trim(system('brew --prefix llvm')).'/bin/clangd'
-
 " Fix characters not displaying properly
 let &t_TI = ""
 let &t_TE = ""
@@ -93,7 +98,7 @@ let g:black_linelength=100
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 set t_Co=256
 set encoding=utf-8
-" set relativenumber
+set relativenumber
 set number
 set showcmd
 set mouse=a
@@ -124,18 +129,6 @@ map <c-l> :lclose<CR><c-w>l
 " nnoremap <C-K> <C-W><C-K>
 " nnoremap <C-L> <C-W><C-L>
 " nnoremap <C-H> <C-W><C-H>
-
-" vim-maximizer:
-" nnoremap <leader>m :MaximizerToggle!<CR>
-
-" NeoTerm
-" let g:neoterm_default_mod = 'vertical'
-" let g:neoterm_size = 60
-" let g:neoterm_autoinsert = 1
-" " CTRL+q to toggle terminal:
-" nnoremap <c-x> :Ttoggle<CR>
-" inoremap <c-x> <ESC>:Ttoggle<CR>
-" tnoremap <c-x> <c-\><c-n>:Ttoggle<CR>
 
 " make backspace work normally in insert mode
 set backspace=indent,eol,start
@@ -191,18 +184,18 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
 " Enable folding
-" set foldmethod=indent
-" set foldlevel=99
+set foldmethod=indent
+set foldlevel=99
 
 " Enable folding with the spacebar
-" nnoremap <space> za
+nnoremap <space> za
 
 
 "Proper indentation for Python and JavaScript
 au BufNewFile, BufRead *.py, *.js, *.c, *.cpp, *.h, *.json, *.java, *.bash, *.sh, *.zsh
     \ set tabstop=4 |
     \ set softtabstop=4 |
-    \ set autoindent |
+    " \ set autoindent |
     \ set fileformat=unix |
 	\ let g:prettier#config#tab_width=4
 
@@ -218,34 +211,36 @@ au BufNewFile, BufRead *.html, *.css, *.sass, *.scss
 au BufRead, BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 "Autocomplete stuff
-" let g:ycm_autoclose_preview_window_after_completion=1
-" map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "Color scheme picking logic
 set termguicolors
-if has('gui_gtk3')
-  colorscheme srcery
-else
-  set background=dark
-  colorscheme solarized
-  "colorscheme zenburn
-endif
+colorscheme srcery
 
-" call togglebg#map("<F5>")
+" if has('gui_gtk3')
+"   colorscheme srcery
+" else
+"   set background=dark
+"   colorscheme solarized
+"   " colorscheme zenburn
+" endif
+
+call togglebg#map("<F5>")
 
 highlight Pmenu ctermbg=Black guibg=Black
 
 "VeryMagic
 let g:VeryMagic = 1 " (default is 1) 
-" let g:VeryMagicSubstitute = 1  " (default is 0)
-" let g:VeryMagicGlobal = 1  " (default is 0)
-" let g:VeryMagicVimGrep = 1  " (default is 0)
-" let g:VeryMagicSearchArg = 1  " (default is 0, :edit +/{pattern}))
-" let g:VeryMagicFunction = 1  " (default is 0, :fun /{pattern})
-" let g:VeryMagicHelpgrep = 1  " (default is 0)
-" let g:VeryMagicRange = 1  " (default is 0, search patterns in command ranges)
-" let g:VeryMagicEscapeBackslashesInSearchArg = 1  " (default is 0, :edit +/{pattern}))
-" let g:SortEditArgs = 1  " (default is 0, see below)
+let g:VeryMagicSubstitute = 0  " (default is 0)
+let g:VeryMagicGlobal = 0  " (default is 0)
+let g:VeryMagicVimGrep = 0  " (default is 0)
+let g:VeryMagicSearchArg = 0  " (default is 0, :edit +/{pattern}))
+let g:VeryMagicFunction = 0  " (default is 0, :fun /{pattern})
+let g:VeryMagicHelpgrep = 0  " (default is 0)
+let g:VeryMagicRange = 0  " (default is 0, search patterns in command ranges)
+let g:VeryMagicEscapeBackslashesInSearchArg = 0  " (default is 0, :edit +/{pattern}))
+let g:SortEditArgs = 0  " (default is 0, see below)
 
 " Codefmt
 Glaive codefmt clang_format_style="file"
@@ -317,8 +312,8 @@ autocmd FileType htmldjango,javascript,jinja.html nnoremap <buffer> <C-f> :call 
 " augroup END
 
 " Syntastic
-" let g:ycm_show_diagnostics_ui = 0
-" let g:syntastic_cpp_checkers = ['gcc']
+let g:ycm_show_diagnostics_ui = 0
+let g:syntastic_cpp_checkers = ['gcc']
 
 function JustCloseSyntasticWindow()
     "Check which buffer we are in, and if not, return to the main one:
@@ -356,16 +351,6 @@ let g:airline_disable_statusline = 0
 let g:airline_detect_spelllang=1
 let g:airline_detect_spell=1
 
-let g:vimspector_enable_mappings = 'HUMAN'
-
-" Copilot:
-" Disable automatic suggestions:
-" let g:copilot_enabled = v:false
-" Trigger copilot panel:
-" map <C-/> :Copilot<CR>
-" Trigger inline suggestion
-" imap <C-i> <M-Bslash>
-" Request next inline suggestion:
-" imap <C-n> <M-]>
-" Request previous inline suggestion:
-" imap <C-m> <M-[>
+" Goyo:
+let g:goyo_width = 100
+let g:goyo_height = '100%'
