@@ -71,7 +71,7 @@ ZSH_THEME="candy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git colorize colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,6 +101,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+journal_repo_location="/Users/M279922/Desktop/journal"
+alias "journal"="nvim $($journal_repo_location/make_new_journal_entry.sh $1)"
+
+# Personal aliases
 alias ll="ls -la"
 alias python="python3.13"
 alias py="python3.13"
@@ -108,6 +112,8 @@ alias ts="trash"
 alias venv="source venv/bin/activate"
 alias pip="python3.13 -m pip"
 alias vim="nvim"
+alias t="tree"
+alias man="colored man"
 
 MANGOBIN=/Users/gml/bin; PATH=${MANGOBIN}:${PATH}; export PATH
 
@@ -121,3 +127,16 @@ export PATH="/Users/gml/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export NVIM_PYTHON_LOG_FILE="/Users/gml/logs/neovim_python.log"
+
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/zsh-vim-mode/zsh-vim-mode.plugin.zsh
+
+# ZSH Vim Mode settings
+MODE_CURSOR_VIINS="#808080 blinking bar"
+MODE_CURSOR_NORMAL="$MODE_CURSOR_VIINS steady block"
+MODE_CURSOR_VISUAL="$MODE_CURSOR_VIINS steady bar"
+MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #008080"
+MODE_CURSOR_REPLACE="$MODE_CURSOR_VISUAL #800000"
+MODE_CURSOR_VICMD="green block"
+MODE_CURSOR_SEARCH="#800080 steady underline"
+KEYTIMEOUT=0.1

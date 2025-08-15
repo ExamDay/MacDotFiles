@@ -37,7 +37,7 @@ Plugin 'psf/black'
 Plugin 'preservim/nerdcommenter'
 
 Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'xuhdev/vim-latex-live-preview'
+" Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'prettier/vim-prettier'
 Plugin 'tpope/vim-surround'
 Plugin 'tweekmonster/django-plus.vim'
@@ -95,7 +95,6 @@ let g:black_linelength=100
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 set t_Co=256
 set encoding=utf-8
-set relativenumber
 set number
 set showcmd
 set mouse=a
@@ -351,3 +350,45 @@ let g:airline_detect_spell=1
 " Goyo:
 let g:goyo_width = 100
 let g:goyo_height = '100%'
+
+
+" Copilot:
+" Disable automatic suggestions:
+" let g:copilot_enabled = v:false
+" Trigger copilot panel:
+map <C-/> :Copilot<CR>
+" Trigger inline suggestion
+" imap <C-i> <M-Bslash>
+" Request next inline suggestion:
+" imap <C-n> <M-]>
+" Request previous inline suggestion:
+" imap <C-m> <M-[>
+" List workspace folders:
+let g:copilot_workspace_folders = ['~/Desktop/nil_wizard', '~/Desktop/zhou/threeT27T', '~/Desktop/hu/fhir']
+
+" Map <leader>t to insert the current time of day:
+nnoremap <leader>t "=strftime("%H:%M:%S %B %e %Y")<CR>p
+
+" Use <leader>i to interleave the visually selected two blocks
+" Interleave two equal-length visual blocks via awk
+function! InterleaveWithAwk()
+  " 1) Grab the visual start/end marks
+  let l = line("'<")
+  let r = line("'>")
+  let n = r - l + 1
+  if n % 2 != 0
+    echoerr "Interleave: need an even number of lines (got " . n . ")"
+    return
+  endif
+
+  " 2) Calculate half-way and build the awk program
+  let h    = n / 2
+  let prog = "NR<=half{buf[NR]=$0; next} {print buf[NR-half]; print}"
+
+  " 3) Run it only on those lines
+  let cmd = printf('%d,%d!awk -v half=%d ''%s''', l, r, h, prog)
+  execute cmd
+endfunction
+
+" Map it in visual mode to <leader>i
+xnoremap <silent> <leader>i :<C-U>call InterleaveWithAwk()<CR>
