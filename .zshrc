@@ -129,7 +129,7 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export NVIM_PYTHON_LOG_FILE="/Users/gml/logs/neovim_python.log"
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/zsh-vim-mode/zsh-vim-mode.plugin.zsh
+source ~/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh
 
 # ZSH Vim Mode settings
 MODE_CURSOR_VIINS="#808080 blinking bar"
