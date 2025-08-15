@@ -102,13 +102,14 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias ll="ls -la"
-alias python="python3"
-alias py="python3"
+alias python="python3.13"
+alias py="python3.13"
 alias ts="trash"
 alias venv="source venv/bin/activate"
+alias pip="python3.13 -m pip"
 alias vim="nvim"
 
-MANGOBIN=/Users/M279922/bin; PATH=${MANGOBIN}:${PATH}; export PATH
+MANGOBIN=/Users/gml/bin; PATH=${MANGOBIN}:${PATH}; export PATH
 
 # LLVM:
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
@@ -116,5 +117,7 @@ export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/M279922/.rd/bin:$PATH"
+export PATH="/Users/gml/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export NVIM_PYTHON_LOG_FILE="/Users/gml/logs/neovim_python.log"

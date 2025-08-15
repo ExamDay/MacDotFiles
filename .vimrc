@@ -36,9 +36,6 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'psf/black'
 Plugin 'preservim/nerdcommenter'
 
-" Plugin 'git@github.com:tabnine/YouCompleteMe.git'
-" Plugin 'codota/tabnine-vim'
-
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'prettier/vim-prettier'
@@ -60,12 +57,12 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/goyo.vim'
 
-" Plugin 'Valloric/YouCompleteMe'
 Plugin 'https://github.com/Valloric/YouCompleteMe.git'
 
 Plugin 'akinsho/ToggleTerm.nvim'
 
 Plugin 'elubow/cql-vim'
+
 " UNCOMMENT THE REST OF THIS BLOCK ONLY AFTER INSTALLING ALL PLUGINS 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required for Vundle
