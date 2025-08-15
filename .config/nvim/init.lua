@@ -10,3 +10,5 @@ require "user.toggleterm"
 vim.g.copilot_workspace_folders = {
 	"~/Desktop/puppetlegion/puppetlegion"
 }
+
+require "user.cmp"

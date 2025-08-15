@@ -34,13 +34,28 @@ packer.init({
 -- Install your plugins here
 return packer.startup(function(use)
 	-- My plugins here
-	use 'wbthomason/packer.nvim' -- Have packer manage itself
-	use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
-	use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-
+	-- Have packer manage itself
+	use 'wbthomason/packer.nvim'
+	-- An implementation of the Popup API from vim in Neovim
+	use "nvim-lua/popup.nvim"
+	-- Useful lua functions used ny lots of plugins
+	use "nvim-lua/plenary.nvim"
+	-- Terminal support
 	use {"akinsho/toggleterm.nvim", tag = '*', config = function()
 	require("toggleterm").setup()
 	end}
+
+	-- A powerful and fast auto-completion engine
+	use 'neovim/nvim-lspconfig'
+	use 'hrsh7th/cmp-nvim-lsp'
+	use 'hrsh7th/cmp-buffer'
+	use 'hrsh7th/cmp-path'
+	use 'hrsh7th/cmp-cmdline'
+	use 'hrsh7th/nvim-cmp'
+
+	-- For vsnip users.
+	use 'hrsh7th/cmp-vsnip'
+	use 'hrsh7th/vim-vsnip'
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

@@ -57,7 +57,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/goyo.vim'
 
-Plugin 'https://github.com/Valloric/YouCompleteMe.git'
+" Plugin 'https://github.com/Valloric/YouCompleteMe.git'
 
 Plugin 'akinsho/ToggleTerm.nvim'
 
@@ -392,3 +392,4 @@ endfunction
 
 " Map it in visual mode to <leader>i
 xnoremap <silent> <leader>i :<C-U>call InterleaveWithAwk()<CR>
+
