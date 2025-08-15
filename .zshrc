@@ -101,7 +101,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-journal_repo_location="~/Documents/MacDotFiles/journal"
+journal_repo_location="$HOME/Documents/MacDotFiles/journal"
 alias "journal"="nvim $($journal_repo_location/make_new_journal_entry.sh $1)"
 
 # Personal aliases
