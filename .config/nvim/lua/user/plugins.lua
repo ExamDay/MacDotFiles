@@ -45,17 +45,26 @@ return packer.startup(function(use)
 	require("toggleterm").setup()
 	end}
 
-	-- A powerful and fast auto-completion engine
+	-- Nvim-Cmp
 	use 'neovim/nvim-lspconfig'
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-buffer'
 	use 'hrsh7th/cmp-path'
 	use 'hrsh7th/cmp-cmdline'
-	use 'hrsh7th/nvim-cmp'
+	-- use 'hrsh7th/nvim-cmp'
+	-- Feat/above branch:
+	use 'llllvvuu/nvim-cmp'
 
-	-- For vsnip users.
-	use 'hrsh7th/cmp-vsnip'
-	use 'hrsh7th/vim-vsnip'
+	-- -- For vsnip users.
+	-- use 'hrsh7th/cmp-vsnip'
+	-- use 'hrsh7th/vim-vsnip'
+
+	-- For luasnip users.
+	use 'L3MON4D3/LuaSnip'
+	use 'saadparwaiz1/cmp_luasnip'
+	
+	-- -- Blink-Cmp:
+    -- use 'Saghen/blink.cmp'
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
