@@ -26,7 +26,7 @@ snippet = {
 
 
 view = {                                                        
-  entries = {name = 'custom'} 
+  entries = {name = 'custom', vertical_positioning = 'above', selection_ordering = 'bottom_up'}
 },
 
 -- -- For vsnip:
