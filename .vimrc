@@ -90,7 +90,7 @@ let python_highlight_all=1
 syntax on
 
 let g:SimpylFold_docstring_preview=1
-let g:black_linelength=100
+let g:black_linelength=80
 
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 set t_Co=256
@@ -100,7 +100,7 @@ set showcmd
 set mouse=a
 set clipboard=unnamed
 set hlsearch
-set textwidth=100
+set textwidth=80
 set fo=cq  " dont autowrap text by default (add 't' flag to autowrap)
 set wrapmargin=0  " dont wrap based on terminal size
 set tabstop=4
@@ -348,7 +348,7 @@ let g:airline_detect_spelllang=1
 let g:airline_detect_spell=1
 
 " Goyo:
-let g:goyo_width = 100
+let g:goyo_width = 80
 let g:goyo_height = '100%'
 
 

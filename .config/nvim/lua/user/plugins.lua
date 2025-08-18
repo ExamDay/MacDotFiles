@@ -36,10 +36,10 @@ return packer.startup(function(use)
 	-- My plugins here
 	-- Have packer manage itself
 	use 'wbthomason/packer.nvim'
-	-- An implementation of the Popup API from vim in Neovim
-	use "nvim-lua/popup.nvim"
-	-- Useful lua functions used ny lots of plugins
-	use "nvim-lua/plenary.nvim"
+	-- -- An implementation of the Popup API from vim in Neovim
+	-- use "nvim-lua/popup.nvim"
+	-- -- Useful lua functions used ny lots of plugins
+	-- use "nvim-lua/plenary.nvim"
 	-- Terminal support
 	use {"akinsho/toggleterm.nvim", tag = '*', config = function()
 	require("toggleterm").setup()
@@ -51,9 +51,9 @@ return packer.startup(function(use)
 	use 'hrsh7th/cmp-buffer'
 	use 'hrsh7th/cmp-path'
 	use 'hrsh7th/cmp-cmdline'
-	-- use 'hrsh7th/nvim-cmp'
+	use 'hrsh7th/nvim-cmp'
 	-- Feat/above branch:
-	use 'llllvvuu/nvim-cmp'
+	-- use 'llllvvuu/nvim-cmp'
 
 	-- -- For vsnip users.
 	-- use 'hrsh7th/cmp-vsnip'
