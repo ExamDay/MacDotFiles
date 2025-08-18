@@ -140,3 +140,6 @@ MODE_CURSOR_REPLACE="$MODE_CURSOR_VISUAL #800000"
 MODE_CURSOR_VICMD="green block"
 MODE_CURSOR_SEARCH="#800080 steady underline"
 KEYTIMEOUT=1
+
+# Remove the "Esc-b" Emacs binding as it conflicts with vim-mode:
+bindkey -r '\eb'
