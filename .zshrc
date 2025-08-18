@@ -115,7 +115,7 @@ alias vim="nvim"
 alias t="tree"
 alias man="colored man"
 
-MANGOBIN=/Users/gml/bin; PATH=${MANGOBIN}:${PATH}; export PATH
+MANGOBIN=$HOME/bin; PATH=${MANGOBIN}:${PATH}; export PATH
 
 # LLVM:
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
@@ -123,10 +123,10 @@ export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/gml/.rd/bin:$PATH"
+export PATH="$HOME/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-export NVIM_PYTHON_LOG_FILE="/Users/gml/logs/neovim_python.log"
+export NVIM_PYTHON_LOG_FILE="$HOME/logs/neovim_python.log"
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh
