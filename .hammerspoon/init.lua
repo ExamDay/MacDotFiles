@@ -8,8 +8,8 @@ hs.hotkey.bind({"cmd","ctrl"}, "T", function()
     -- Already running: explicitly make a new window
     hs.osascript.applescript([[
       tell application "iTerm2"
-        activate
         create window with default profile
+        activate
       end tell
     ]])
   end
