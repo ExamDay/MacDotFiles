@@ -137,7 +137,7 @@ function git_commit_push() {
 # An alias to create a new journal entry and back it up:
 journal_repo_location="$HOME/Documents/MacDotFiles/journal"
 journal_entries_location="$HOME/Documents/MacDotFiles/journal/journals"
-alias "journal"="nvim $($journal_repo_location/make_new_journal_entry.sh $1) && delete_empty_files $journal_entries_location && git_commit_push $journal_entries_location 'Wrote to journal'"
+alias "journal"="nvim $($journal_repo_location/make_new_journal_entry.sh $1) && delete_empty_files $journal_entries_location && git_commit_push $journal_entries_location 'Wrote to journal' && exit"
 
 # Personal aliases
 alias ll="ls -la"

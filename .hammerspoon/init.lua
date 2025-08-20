@@ -26,15 +26,16 @@ hs.hotkey.bind({"cmd","ctrl"}, "J", function()
 	  else
 		-- Already running: explicitly make a new window and run the command
 		hs.osascript.applescript([[
-		  tell application "iTerm2"
+		tell application "iTerm2"
 			create window with default profile
 			tell current session of current window
-			  write text "journal"
+				write text "journal"
 			end tell
 			activate
-		  end tell
-		tell application "System Events"
-			keystroke "f" using {command down, control down}
+		end tell
+		tell application "System Events" to tell process "iTerm2"
+			-- set value of attribute "AXFullScreen" of window 1 to true
+			set value of attribute "AXFullScreen" of window 1 to true
 		end tell
 		]])
 	  end
