@@ -1,3 +1,4 @@
+-- Open a new iTerm2 window with a hotkey and them focus it:
 hs.hotkey.bind({"cmd","ctrl"}, "T", function()
   local app = hs.application.get("iTerm2")
 
@@ -14,3 +15,28 @@ hs.hotkey.bind({"cmd","ctrl"}, "T", function()
     ]])
   end
 end)
+
+-- Open a new iTerm2 window with a hotkey, then have it run the "journal"
+-- command, and then focus it and make it fullscreen:
+hs.hotkey.bind({"cmd","ctrl"}, "J", function()
+	  local app = hs.application.get("iTerm2")
+	  if app == nil then
+		-- Not running: launch it (will create 1 default window automatically)
+		hs.application.launchOrFocusByBundleID("com.googlecode.iterm2")
+	  else
+		-- Already running: explicitly make a new window and run the command
+		hs.osascript.applescript([[
+		  tell application "iTerm2"
+			create window with default profile
+			tell current session of current window
+			  write text "journal"
+			end tell
+			activate
+		  end tell
+		tell application "System Events"
+			keystroke "f" using {command down, control down}
+		end tell
+		]])
+	  end
+  end)
+
