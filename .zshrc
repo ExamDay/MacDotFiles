@@ -101,8 +101,43 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# A fucntion to delete empty files of any time from a directory:
+function delete_empty_files() {
+	local folder="$1"
+	if [ -d "$folder" ]; then
+		output=$(find "$folder" -type f -empty -print -delete)
+		# If there where any empty files, print a message:
+		if [ -n "$output" ]; then
+			echo "Empty files deleted in $folder."
+		else
+			echo "No empty files found in $folder."
+		fi
+	else
+		echo "Directory $folder does not exist."
+	fi
+}
+	
+
+# A function to update the journal database:
+function git_commit_push() {
+	local folder="$1"
+	local message="$2"
+	if [ -d "$folder" ]; then
+		cd "$folder" || return
+		# Add everything but hidden files:
+		git add --all -- ':!.*' && \
+		git commit -m "${message:-'auto update'}" && \
+		git push
+		cd - > /dev/null || return
+	else
+		echo "Directory $folder does not exist."
+	fi
+}
+
+# An alias to create a new journal entry and back it up:
 journal_repo_location="$HOME/Documents/MacDotFiles/journal"
-alias "journal"="nvim $($journal_repo_location/make_new_journal_entry.sh $1)"
+journal_entries_location="$HOME/Documents/MacDotFiles/journal/journals"
+alias "journal"="nvim $($journal_repo_location/make_new_journal_entry.sh $1) && delete_empty_files $journal_entries_location && git_commit_push $journal_entries_location 'Wrote to journal'"
 
 # Personal aliases
 alias ll="ls -la"
