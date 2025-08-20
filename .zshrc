@@ -156,6 +156,7 @@ alias ga="git add"
 alias gc="git commit"
 alias gcm="git commit -m '[no message]'"
 alias gp="git push"
+alias dot="cd $HOME/Documents/MacDotFiles"
 
 MANGOBIN=$HOME/bin; PATH=${MANGOBIN}:${PATH}; export PATH
 
