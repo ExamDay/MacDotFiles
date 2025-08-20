@@ -149,6 +149,13 @@ alias pip="python3.13 -m pip"
 alias vim="nvim"
 alias t="tree"
 alias man="colored man"
+alias q="exit"
+alias c="clear"
+alias g="git"
+alias ga="git add"
+alias gc="git commit"
+alias gcm="git commit -m '[no message]'"
+alias gp="git push"
 
 MANGOBIN=$HOME/bin; PATH=${MANGOBIN}:${PATH}; export PATH
 
