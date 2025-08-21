@@ -139,6 +139,11 @@ journal_repo_location="$HOME/Documents/MacDotFiles/journal"
 journal_entries_location="$HOME/Documents/MacDotFiles/journal/journals"
 alias "journal"="nvim $($journal_repo_location/make_new_journal_entry.sh $1) && delete_empty_files $journal_entries_location && git_commit_push $journal_entries_location 'Wrote to journal' && exit"
 
+# An alias to create a new schedule and back it up:
+schedule_repo_location="$HOME/Documents/MacDotFiles/schedule"
+schedule_entries_location="$HOME/Documents/MacDotFiles/schedule/schedules"
+alias "schedule"="nvim $($schedule_repo_location/make_new_schedule.sh $1) && delete_empty_files $schedule_entries_location && git_commit_push $schedule_entries_location 'Wrote to schedule' && exit"
+
 # Personal aliases
 alias ll="ls -la"
 alias python="python3.13"
