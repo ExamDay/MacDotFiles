@@ -1,6 +1,6 @@
 [submodule "journal"]
 	path = journal
 	url = git@github.com:ExamDay/journal.git
-[submodule "schedule"]
+[submodule "schedules"]
 	path = schedule
 	url = git@github.com:ExamDay/schedules.git
