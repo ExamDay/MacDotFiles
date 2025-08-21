@@ -3,4 +3,4 @@
 	url = git@github.com:ExamDay/journal.git
 [submodule "schedule"]
 	path = schedule
-	url = git@github.com:ExamDay/schedule.git
+	url = git@github.com:ExamDay/schedules.git
