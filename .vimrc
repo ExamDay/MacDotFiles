@@ -393,3 +393,8 @@ endfunction
 " Map it in visual mode to <leader>i
 xnoremap <silent> <leader>i :<C-U>call InterleaveWithAwk()<CR>
 
+" Map leader>c to insert "✅" at the beginning of the line:
+nnoremap <leader>c I✅ <Esc>
+nnoremap <leader>C I✔️ <Esc>
+nnoremap <leader>x I❌ <Esc>
+
