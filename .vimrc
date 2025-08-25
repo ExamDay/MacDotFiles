@@ -301,8 +301,8 @@ autocmd FileType htmldjango,javascript,jinja.html nnoremap <buffer> <C-f> :call 
 "   autocmd FileType gn AutoFormatBuffer gn
 "   autocmd FileType html,htmldjango,jinja.html,css,sass,scss,less,json AutoFormatBuffer js-beautify
 "   autocmd FileType java AutoFormatBuffer google-java-format
-"   autocmd FileType python AutoFormatBuffer yapf
-"   " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+  " autocmd FileType python AutoFormatBuffer yapf
+  " autocmd FileType python AutoFormatBuffer autopep8
 "   autocmd FileType rust AutoFormatBuffer rustfmt
 "   autocmd FileType vue AutoFormatBuffer prettier
 " augroup END
@@ -364,7 +364,7 @@ map <C-/> :Copilot<CR>
 " Request previous inline suggestion:
 " imap <C-m> <M-[>
 " List workspace folders:
-let g:copilot_workspace_folders = ['~/Desktop/nil_wizard', '~/Desktop/zhou/threeT27T', '~/Desktop/hu/fhir']
+let g:copilot_workspace_folders = ['~/Desktop/nil_wizard', '~/Desktop/nil_wizard/modules/stealth_roi_extraction', '~/Desktop/zhou/threeT27T', '~/Desktop/hu/fhir']
 
 " Map <leader>t to insert the current time of day:
 nnoremap <leader>t "=strftime("%H:%M:%S %B %e %Y")<CR>p
