@@ -175,6 +175,7 @@ alias gcm="git commit -m '[no message]'"
 alias gpl="git pull"
 alias gph="git push"
 alias dot="cd $HOME/Documents/MacDotFiles"
+alias nilw="cd $HOME/Desktop/nil_wizard && deactivate 2> /dev/null; source venv/bin/activate"
 
 MANGOBIN=$HOME/bin; PATH=${MANGOBIN}:${PATH}; export PATH
 
@@ -184,7 +185,7 @@ export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="$HOME/.rd/bin:$PATH"
+export PATH="/Users/M279922/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export NVIM_PYTHON_LOG_FILE="$HOME/logs/neovim_python.log"
