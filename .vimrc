@@ -393,8 +393,35 @@ endfunction
 " Map it in visual mode to <leader>i
 xnoremap <silent> <leader>i :<C-U>call InterleaveWithAwk()<CR>
 
-" Map leader>c to insert "✅" at the beginning of the line:
+" Un-interleave two equal-length visual blocks via awk
+function! UninterleaveWithAwkSystem()
+  let l = line("'<")
+  let r = line("'>")
+  let n = r - l + 1
+  if n % 2 != 0
+    echoerr "Uninterleave: need an even number of lines (got " . n . ")"
+    return
+  endif
+
+  let prog = 'NR%2==1{odd[++o]=$0; next} {even[++e]=$0} END{for(i=1;i<=o;i++)print odd[i]; for(i=1;i<=e;i++)print even[i]}'
+  let cmd  = 'awk ' . shellescape(prog)
+
+  let out = systemlist(cmd, getline(l, r))
+  if v:shell_error
+    echoerr 'awk failed'
+    return
+  endif
+  call setline(l, out)
+endfunction
+
+xnoremap <silent> <leader>I :<C-U>call UninterleaveWithAwkSystem()<CR>
+
+" Map leader>c to insert an affirmative checkmark at the beginning of the line:
 nnoremap <leader>c I✅ <Esc>
+" Map leader>c to insert a lukewarm checkmark at the beginning of the line:
 nnoremap <leader>C I✔️ <Esc>
+" Map leader>c to insert an negative X mark at the beginning of the line:
 nnoremap <leader>x I❌ <Esc>
+" Map leader>> to insert a right-pointing arrow at the beginning of the line:
+nnoremap <leader>> I➡️ <Esc>
 
