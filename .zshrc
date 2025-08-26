@@ -205,3 +205,5 @@ KEYTIMEOUT=1
 
 # Remove the "Esc-b" Emacs binding as it conflicts with vim-mode:
 bindkey -r '\eb'
+
+export PATH="$HOME/.cargo/bin:$PATH"
