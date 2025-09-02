@@ -1,3 +1,6 @@
+# This stops oh-my-zsh from prompting for updates (cuts off the first letter of
+# first prompts otherwise)
+DISABLE_AUTO_UPDATE="true"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 

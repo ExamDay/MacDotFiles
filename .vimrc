@@ -212,7 +212,12 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "Color scheme picking logic
 set termguicolors
+" Set default colorscheme:
 colorscheme srcery
+" " Set alternative colorscheme if file is in a folder named 'journals':
+" autocmd BufRead,BufNewFile */journals/* colorscheme solarized
+" " Set different alternative colorscheme if file is in a folder named 'schedules':
+" autocmd BufRead,BufNewFile */schedules/* colorscheme zenburn
 
 " if has('gui_gtk3')
 "   colorscheme srcery
