@@ -39,7 +39,10 @@ hs.hotkey.bind({"cmd","ctrl"}, "J", function()
 		end tell
 		tell application "System Events" to tell process "iTerm2"
 			-- set value of attribute "AXFullScreen" of window 1 to true
-			set value of attribute "AXFullScreen" of window 1 to true
+			-- Instead of fullscreen, set the hieght to 100% of the screen
+			-- hieght and the width to 81 characters.
+			set position of window 1 to {0, 0}
+			set size of window 1 to {720, 1200}
 		end tell
 		]])
 	  end
@@ -64,7 +67,10 @@ hs.hotkey.bind({"cmd","ctrl"}, "P", function()
 		end tell
 		tell application "System Events" to tell process "iTerm2"
 			-- set value of attribute "AXFullScreen" of window 1 to true
-			set value of attribute "AXFullScreen" of window 1 to true
+			-- Instead of fullscreen, set the hieght to 100% of the screen
+			-- hieght and the width to 81 characters.
+			set position of window 1 to {0, 0}
+			set size of window 1 to {720, 1200}
 		end tell
 		]])
 	  end
