@@ -152,12 +152,16 @@ function git_pull() {
 # An alias to create a new journal entry and back it up:
 journal_repo_location="$HOME/Documents/MacDotFiles/journal"
 journal_entries_location="$HOME/Documents/MacDotFiles/journal/journals"
-alias "journal"="cd $journal_repo_location; git_pull $journal_repo_location; cd $journal_entries_location; nvim $($journal_repo_location/make_new_journal_entry.sh $1) && delete_empty_files $journal_entries_location && git_commit_push $journal_entries_location 'Wrote to journal' && exit"
+if [[ -e $journal_repo_location/make_new_journal_entry.sh ]]; then
+	alias "journal"="cd $journal_repo_location; git_pull $journal_repo_location; cd $journal_entries_location; nvim $($journal_repo_location/make_new_journal_entry.sh $1) && delete_empty_files $journal_entries_location && git_commit_push $journal_entries_location 'Wrote to journal' && exit"
+fi
 
 # An alias to create a new schedule and back it up:
 schedule_repo_location="$HOME/Documents/MacDotFiles/schedule"
 schedule_entries_location="$HOME/Documents/MacDotFiles/schedule/schedules"
-alias "schedule"="cd $schedule_repo_location; git_pull $schedule_repo_location; cd $schedule_entries_location; nvim $($schedule_repo_location/make_new_schedule.sh $1) && delete_empty_files $schedule_entries_location && git_commit_push $schedule_entries_location 'Wrote to schedule' && exit"
+if [[ -e $schedule_repo_location/make_new_schedule.sh ]]; then
+	alias "schedule"="cd $schedule_repo_location; git_pull $schedule_repo_location; cd $schedule_entries_location; nvim $($schedule_repo_location/make_new_schedule.sh $1) && delete_empty_files $schedule_entries_location && git_commit_push $schedule_entries_location 'Wrote to schedule' && exit"
+fi
 
 # Personal aliases
 alias ll="ls -la"
