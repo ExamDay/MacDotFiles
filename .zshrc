@@ -217,3 +217,15 @@ bindkey -r '\eb'
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Python/3.13/bin:$PATH"
+
+# check if we are on linux or macos:
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	# linux
+	export NVM_DIR="$HOME/.nvm"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	# macOS
+	export NVM_DIR="/opt/homebrew/opt/nvm/"
+fi
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
