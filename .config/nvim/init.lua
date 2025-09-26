@@ -4,6 +4,8 @@ let &packpath=&runtimepath
 source ~/.vimrc
 ]])
 
+vim.lsp.enable('pyright')
+
 require "user.plugins"
 require "user.toggleterm"
 
