@@ -85,8 +85,10 @@ source $ZSH/oh-my-zsh.sh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
+export ANTSPATH=$HOME/Programs/ants-2.4.4/bin/
+
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -106,6 +108,21 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+mangoo() {
+	mango "$(realpath "$1")"
+}
+
+# ANTs
+PATH=$HOME/Programs/ants-2.4.4/bin:$PATH
+# DCM4CHE
+PATH=$HOME/Programs/dcm4che-5.31.0/bin:$PATH
+# Freesurfer
+export FREESURFER_HOME=/usr/local/freesurfer/7.4.1
+export FS_LICENSE=$FREESURFER_HOME/license.txt
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
+# FastSurfer
+export PYTHONPATH="${PYTHONPATH}:${HOME}/Programs/FastSurfer"
 
 # A fucntion to delete empty files of any time from a directory:
 function delete_empty_files() {
