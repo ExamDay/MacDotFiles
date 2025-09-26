@@ -205,8 +205,11 @@ MODE_CURSOR_REPLACE="$MODE_CURSOR_VISUAL #800000"
 MODE_CURSOR_VICMD="green block"
 MODE_CURSOR_SEARCH="#800080 steady underline"
 KEYTIMEOUT=1
+# Disable the "execute" mode in vim-mode:
+VIM_MODE_EXECUTE_BINDINGS=()
 
 # Remove the "Esc-b" Emacs binding as it conflicts with vim-mode:
 bindkey -r '\eb'
 
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/Library/Python/3.13/bin:$PATH"
