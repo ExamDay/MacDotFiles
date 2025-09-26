@@ -109,6 +109,10 @@ export LANG=en_US.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+if $OSTYPE == "linux-gnu"* ]]; then
+	alias mango="$HOME/Programs/Mango/mango"
+fi
+
 mangoo() {
 	mango "$(realpath "$1")"
 }
@@ -124,7 +128,7 @@ source $FREESURFER_HOME/SetUpFreeSurfer.sh
 # FastSurfer
 export PYTHONPATH="${PYTHONPATH}:${HOME}/Programs/FastSurfer"
 
-# A fucntion to delete empty files of any time from a directory:
+# A fucntion to delete empty files of any type from a directory:
 function delete_empty_files() {
 	local folder="$1"
 	if [ -d "$folder" ]; then
@@ -249,3 +253,6 @@ fi
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	# linux
+fi
