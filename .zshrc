@@ -234,7 +234,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	# macOS
-	export NVM_DIR="/opt/homebrew/opt/nvm/"
+	export NVM_DIR="/opt/homebrew/opt/nvm"
 	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 	  [ -s "$NVM_DIR/etc/bash_completion.d/nvm" ] && \. "$NVM_DIR/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 fi
