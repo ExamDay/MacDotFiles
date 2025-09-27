@@ -207,6 +207,7 @@ alias gpl="git pull"
 alias gph="git push"
 alias dot="cd $HOME/Documents/MacDotFiles"
 alias nilw="cd $NILWIZARD_DIR && venv"
+alias nvimconfig="cd $HOME/.config/nvim && ll"
 
 # ZSH Vim Mode settings
 MODE_CURSOR_VIINS="#808080 blinking bar"
