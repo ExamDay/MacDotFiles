@@ -254,11 +254,15 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	# DCM4CHE
 	PATH=$HOME/Programs/dcm4che-5.31.0/bin:$PATH
 	# Freesurfer
-	export FREESURFER_HOME=/usr/local/freesurfer/7.4.1
-	export FS_LICENSE=$FREESURFER_HOME/license.txt
-	source $FREESURFER_HOME/SetUpFreeSurfer.sh
-	# FastSurfer
-	export PYTHONPATH="${PYTHONPATH}:${HOME}/Programs/FastSurfer"
+	FREESURFER_HOME=/usr/local/freesurfer/7.4.1
+	# Only duck with freesurfer if its home directory actually exists:
+	if [ -d "$FREESURFER_HOME" ]; then
+		export FREESURFER_HOME
+		export FS_LICENSE=$FREESURFER_HOME/license.txt
+		source $FREESURFER_HOME/SetUpFreeSurfer.sh
+		# FastSurfer
+		export PYTHONPATH="${PYTHONPATH}:${HOME}/Programs/FastSurfer"
+	fi
 	
 	export PATH=/home/physics/Programs/dcm2niix/bin:$PATH
 	export PATH=/home/physics/Programs/trackvis:$PATH
@@ -274,6 +278,12 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	   autoload -U +X compinit && compinit \
 		  && source $HOME/.afni/help/all_progs.COMP.zsh
 	fi
+
+	# Check if "/opt/nvim-linux-x86_64/bin" exists, and if so add it to the PATH
+	if [ -d "/opt/nvim-linux-x86_64/bin" ]; then
+		export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
+	fi
+
 	source $HOME/Programs/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	source ~/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh
