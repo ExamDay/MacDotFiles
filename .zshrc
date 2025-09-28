@@ -143,7 +143,7 @@ function delete_empty_files() {
 		echo "Directory $folder does not exist."
 	fi
 }
-	
+
 
 # A function to update the journal database:
 function git_commit_push() {
@@ -263,7 +263,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 		# FastSurfer
 		export PYTHONPATH="${PYTHONPATH}:${HOME}/Programs/FastSurfer"
 	fi
-	
+
 	export PATH=/home/physics/Programs/dcm2niix/bin:$PATH
 	export PATH=/home/physics/Programs/trackvis:$PATH
 	export PATH=/home/physics/Programs/dtk:$PATH
@@ -299,3 +299,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh
 fi
+
+# zsh-autosuggestion keybindings:
+# Use Ctrl+l to accept the autosuggestion:
+bindkey '^l' autosuggest-accept
+
