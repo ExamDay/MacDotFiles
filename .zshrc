@@ -304,3 +304,7 @@ fi
 # Use Ctrl+l to accept the autosuggestion:
 bindkey '^l' autosuggest-accept
 
+export nnUNet_raw="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_raw"
+export nnUNet_preprocessed="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_preprocessed"
+export nnUNet_results="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_results"
+
