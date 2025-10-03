@@ -99,7 +99,6 @@ set number
 set showcmd
 set mouse=a
 
-" In ~/.vimrc (works for both Vim and Neovim)
 if has('nvim')
   set clipboard=unnamedplus
 else
