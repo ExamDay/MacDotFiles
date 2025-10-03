@@ -98,7 +98,14 @@ set encoding=utf-8
 set number
 set showcmd
 set mouse=a
-set clipboard=unnamed
+
+" In ~/.vimrc (works for both Vim and Neovim)
+if has('nvim')
+  set clipboard=unnamedplus
+else
+  set clipboard=unnamedplus
+endif
+
 set hlsearch
 set textwidth=80
 set fo=cq  " dont autowrap text by default (add 't' flag to autowrap)
