@@ -227,6 +227,9 @@ bindkey -r '\eb'
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Python/3.13/bin:$PATH"
 
+# PostgreSQL 18:
+export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
+
 # OS Specific NVM setup:
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	# linux
