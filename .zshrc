@@ -290,7 +290,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 		export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
 	fi
 
-	source $HOME/Programs/zsh-autosuggestions/zsh-autosuggestions.zsh
 	source $HOME/Programs/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	# Check if the user-name is in the list of shared users, if not then run
 	# the personal user setup:
@@ -300,15 +299,10 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	fi
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-	source $HOME/Programs/zsh-autosuggestions/zsh-autosuggestions.zsh
 	source $HOME/Programs/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	# source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh
 fi
-
-# zsh-autosuggestion keybindings:
-# Use Ctrl+l to accept the autosuggestion:
-bindkey '^l' autosuggest-accept
 
 if [[ $OSTYPE == "linux-gnu"* ]]; then
 	export nnUNet_raw="/home/physics/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_raw"
