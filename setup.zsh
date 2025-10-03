@@ -3,10 +3,6 @@
 mkdir -p ~/Programs
 # Change to the ~/Programs directory:
 cd ~/Programs
-# Clone the zsh-autosuggestions repository if it doesn't exist:
-if [ ! -d "zsh-autosuggestions" ]; then
-	git clone https://github.com/zsh-users/zsh-autosuggestions.git
-fi
 # Clone the zsh-syntax-highlighting repository if it doesn't exist:
 if [ ! -d "zsh-syntax-highlighting" ]; then
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
@@ -17,15 +13,26 @@ if [ ! -d "zsh-vim-mode" ]; then
 fi
 cd ~
 
-# Install hammerspoon:
-brew install hammerspoon
-mkdir ~/.hammerspoon
-ln -s ~/Documents/MacDotFiles/.hammerspoon/init.lua ~/.hammerspoon/init.lua
-# The rest of hammerspoon setup must be done by starting the program from
-# Launchpad or Spotlight Search
+if [[ $OSTYPE == darwin* ]]; then
+	# Install hammerspoon:
+	brew install hammerspoon
+	mkdir ~/.hammerspoon
+	ln -s ~/Documents/MacDotFiles/.hammerspoon/init.lua ~/.hammerspoon/init.lua
+	# The rest of hammerspoon setup must be done by starting the program from
+	# Launchpad or Spotlight Search
+	# Install neovim:
+	brew install neovim
+else if [[ $OSTYPE == linux* ]]; then
+	# Install zsh:
+	sudo apt install zsh
+else
+	echo "Unsupported OS type: $OSTYPE"
+	exit 1
+fi
 
-# Install neovim:
-brew install neovim
+# Install ohmyzsh:
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 # Copy the vundle.vimrc to .vimrc:
 mv ~/.vimrc ~/backup.vimrc
 cp ./vundle.vimrc ~/.vimrc
@@ -56,5 +63,3 @@ git fetch origin pull/1701/head:feat/above
 git checkout feat/above
 # Go back to the home directory:
 cd ~
-
-
