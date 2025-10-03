@@ -1,8 +1,8 @@
 #!/bin/zsh
-# Make the ~/Programs directory if it doesn't exist:
-mkdir -p ~/Programs
-# Change to the ~/Programs directory:
-cd ~/Programs
+# Make the $HOME/Programs directory if it doesn't exist:
+mkdir -p $HOME/Programs
+# Change to the $HOME/Programs directory:
+cd $HOME/Programs
 # Clone the zsh-syntax-highlighting repository if it doesn't exist:
 if [ ! -d "zsh-syntax-highlighting" ]; then
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
@@ -12,13 +12,13 @@ if [ ! -d "zsh-vim-mode" ]; then
 	git clone https://github.com/softmoth/zsh-vim-mode.git
 fi
 
-cd ~
+cd $HOME
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	# Install hammerspoon:
 	brew install hammerspoon
-	mkdir ~/.hammerspoon
-	ln -s ~/Documents/MacDotFiles/.hammerspoon/init.lua ~/.hammerspoon/init.lua
+	mkdir $HOME/.hammerspoon
+	ln -s $HOME/Documents/MacDotFiles/.hammerspoon/init.lua $HOME/.hammerspoon/init.lua
 	# The rest of hammerspoon setup must be done by starting the program from
 	# Launchpad or Spotlight Search
 	# Install neovim:
@@ -35,38 +35,40 @@ fi
 # Install ohmyzsh:
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# Install vundle:
+git clone git@github.com:VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 # Copy the vundle.vimrc to .vimrc:
-mv ~/.vimrc ~/backup.vimrc
-cp ./vundle.vimrc ~/.vimrc
+mv $HOME/.vimrc $HOME/backup.vimrc
+cp $HOME/Documents/MacDotFiles/vundle.vimrc $HOME/.vimrc
 vim +PluginInstall +qall
 # Delete the vundle-install .vimrc and replace it with a link to the up-to-date vimrc:
-rm ~/.vimrc
-ln -s ~/Documents/MacDotFiles/.vimrc ~/.vimrc
+rm $HOME/.vimrc
+ln -s $HOME/Documents/MacDotFiles/.vimrc $HOME/.vimrc
 vim +PluginInstall +qall
 
 # Make the neovim .config stuff:
-mkdir -p ~/.config/nvim/lua/user
-ln -s ~/Documents/MacDotFiles/.config/nvim/init.lua ~/.config/nvim/init.lua
-ln -s ~/Documents/MacDotFiles/.config/nvim/lua/user/plugins.lua ~/.config/nvim/lua/user/plugins.lua
-ln -s ~/Documents/MacDotFiles/.config/nvim/lua/user/cmp.lua ~/.config/nvim/lua/user/cmp.lua
-ln -s ~/Documents/MacDotFiles/.config/nvim/lua/user/toggleterm.lua ~/.config/nvim/lua/user/toggleterm.lua
+mkdir -p $HOME/.config/nvim/lua/user
+ln -s $HOME/Documents/MacDotFiles/.config/nvim/init.lua $HOME/.config/nvim/init.lua
+ln -s $HOME/Documents/MacDotFiles/.config/nvim/lua/user/plugins.lua $HOME/.config/nvim/lua/user/plugins.lua
+ln -s $HOME/Documents/MacDotFiles/.config/nvim/lua/user/cmp.lua $HOME/.config/nvim/lua/user/cmp.lua
+ln -s $HOME/Documents/MacDotFiles/.config/nvim/lua/user/toggleterm.lua $HOME/.config/nvim/lua/user/toggleterm.lua
 
 # At this point you need to go into
-# ~/Documents/MacDotFiles/.config/nvim/lua/user/plugins.lua and do :w twice to
+# $HOME/.config/nvim/lua/user/plugins.lua and do :w twice to
 # install all the neovim plugins...
 # Can this be done automatically?
 
 # Change to the directory where nvim-cmp is installed:
-cd ~/.local/share/nvim/site/pack/packer/start/nvim-cmp
+cd $HOME/.local/share/nvim/site/pack/packer/start/nvim-cmp
 # Fetch the pull request where the "put menu above the cursor" feature is
 # implemented:
 git fetch origin pull/1701/head:feat/above
 # Switch to the new branch:
 git checkout feat/above
 # Go back to the home directory:
-cd ~
+cd $HOME
 
 # Link the zshrc to .zshrc:
-mv ~/.zshrc ~/backup.zshrc
-ln -s ~/Documents/MacDotFiles/.zshrc ~/.zshrc
+mv $HOME/.zshrc $HOME/backup.zshrc
+ln -s $HOME/Documents/MacDotFiles/.zshrc $HOME/.zshrc
 
