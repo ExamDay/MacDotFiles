@@ -247,6 +247,9 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	# increase repetition rate on hold-key
 	# xset r rate 300 75
 
+	# Add the cuda binaries to the PATH:
+	PATH=/usr/local/cuda-13.0/bin:$PATH
+
 	# Set ANTSPATH for linux:
 	export ANTSPATH=$HOME/Programs/ants-2.4.4/bin/
 	# ANTs
@@ -304,7 +307,13 @@ fi
 # Use Ctrl+l to accept the autosuggestion:
 bindkey '^l' autosuggest-accept
 
-export nnUNet_raw="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_raw"
-export nnUNet_preprocessed="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_preprocessed"
-export nnUNet_results="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_results"
+if [[ $OSTYPE == "linux-gnu"* ]]; then
+	export nnUNet_raw="/home/physics/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_raw"
+	export nnUNet_preprocessed="/home/physics/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_preprocessed"
+	export nnUNet_results="/home/physics/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_results"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	export nnUNet_raw="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_raw"
+	export nnUNet_preprocessed="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_preprocessed"
+	export nnUNet_results="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_results"
+fi
 
