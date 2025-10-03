@@ -11,9 +11,10 @@ fi
 if [ ! -d "zsh-vim-mode" ]; then
 	git clone https://github.com/softmoth/zsh-vim-mode.git
 fi
+
 cd ~
 
-if [[ $OSTYPE == darwin* ]]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
 	# Install hammerspoon:
 	brew install hammerspoon
 	mkdir ~/.hammerspoon
@@ -22,16 +23,13 @@ if [[ $OSTYPE == darwin* ]]; then
 	# Launchpad or Spotlight Search
 	# Install neovim:
 	brew install neovim
-else if [[ $OSTYPE == linux* ]]; then
+elif [[ $OSTYPE == "linux-gnu"* ]]; then
 	# Install zsh:
-	sudo apt install zsh
+	# sudo apt install zsh
 	# Install neovim:
 	# curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
 	# sudo rm -rf /opt/nvim-linux-x86_64
 	# sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
-else
-	echo "Unsupported OS type: $OSTYPE"
-	exit 1
 fi
 
 # Install ohmyzsh:
