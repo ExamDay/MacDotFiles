@@ -298,12 +298,16 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	source $HOME/Programs/zsh-autosuggestions/zsh-autosuggestions.zsh
-	# source $HOME/Programs/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-	source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	source $HOME/Programs/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	# source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh
 fi
 
 # zsh-autosuggestion keybindings:
 # Use Ctrl+l to accept the autosuggestion:
 bindkey '^l' autosuggest-accept
+
+export nnUNet_raw="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_raw"
+export nnUNet_preprocessed="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_preprocessed"
+export nnUNet_results="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_results"
 
