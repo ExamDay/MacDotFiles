@@ -227,9 +227,6 @@ bindkey -r '\eb'
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Python/3.13/bin:$PATH"
 
-# PostgreSQL 18:
-export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
-
 # OS Specific NVM setup:
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	# linux
@@ -241,6 +238,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	export NVM_DIR="/opt/homebrew/opt/nvm"
 	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 	  [ -s "$NVM_DIR/etc/bash_completion.d/nvm" ] && \. "$NVM_DIR/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+	# PostgreSQL 18:
+	export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
 fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
@@ -270,12 +269,12 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 		export PYTHONPATH="${PYTHONPATH}:${HOME}/Programs/FastSurfer"
 	fi
 
-	export PATH=/home/physics/Programs/dcm2niix/bin:$PATH
-	export PATH=/home/physics/Programs/trackvis:$PATH
-	export PATH=/home/physics/Programs/dtk:$PATH
+	export PATH=$HOME/Programs/dcm2niix/bin:$PATH
+	export PATH=$HOME/Programs/trackvis:$PATH
+	export PATH=$HOME/Programs/dtk:$PATH
 
 	# auto-inserted by @update.afni.binaries :
-	export PATH=$PATH:/home/physics/abin
+	export PATH=$PATH:$HOME/abin
 
 	# auto-inserted by @update.afni.binaries :
 	#    set up tab completion for AFNI programs
@@ -305,9 +304,9 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 if [[ $OSTYPE == "linux-gnu"* ]]; then
-	export nnUNet_raw="/home/physics/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_raw"
-	export nnUNet_preprocessed="/home/physics/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_preprocessed"
-	export nnUNet_results="/home/physics/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_results"
+	export nnUNet_raw="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_raw"
+	export nnUNet_preprocessed="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_preprocessed"
+	export nnUNet_results="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_results"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	export nnUNet_raw="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_raw"
 	export nnUNet_preprocessed="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_preprocessed"
