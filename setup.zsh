@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 # Make the ~/Programs directory if it doesn't exist:
 mkdir -p ~/Programs
 # Change to the ~/Programs directory:
