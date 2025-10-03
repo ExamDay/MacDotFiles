@@ -25,6 +25,10 @@ if [[ $OSTYPE == darwin* ]]; then
 else if [[ $OSTYPE == linux* ]]; then
 	# Install zsh:
 	sudo apt install zsh
+	# Install neovim:
+	# curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+	# sudo rm -rf /opt/nvim-linux-x86_64
+	# sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
 else
 	echo "Unsupported OS type: $OSTYPE"
 	exit 1
@@ -63,3 +67,8 @@ git fetch origin pull/1701/head:feat/above
 git checkout feat/above
 # Go back to the home directory:
 cd ~
+
+# Link the zshrc to .zshrc:
+mv ~/.zshrc ~/backup.zshrc
+ln -s ~/Documents/MacDotFiles/.zshrc ~/.zshrc
+
