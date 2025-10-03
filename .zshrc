@@ -82,9 +82,6 @@ source $ZSH/oh-my-zsh.sh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -104,7 +101,34 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# A fucntion to delete empty files of any time from a directory:
+if [[ $OSTYPE == "linux-gnu"* ]]; then
+	# You may need to manually set your language environment
+	export LANG=en_US.UTF-8
+	# Set Mango alias for linux:
+	alias mango="$HOME/Programs/Mango/mango"
+	# Supress FreeSurfer boilerplate output:
+	export FS_FREESURFERENV_NO_OUTPUT=1
+
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	# Set mangobin directory for macOS:
+	MANGOBIN=$HOME/bin; PATH=${MANGOBIN}:${PATH}; export PATH
+	# LLVM:
+	export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+	export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+	export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+
+	### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+	export PATH="$HOME/.rd/bin:$PATH"
+	### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+	export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+	export NVIM_PYTHON_LOG_FILE="$HOME/logs/neovim_python.log"
+fi
+
+mangoo() {
+	mango "$(realpath "$1")"
+}
+
+# A fucntion to delete empty files of any type from a directory:
 function delete_empty_files() {
 	local folder="$1"
 	if [ -d "$folder" ]; then
@@ -119,7 +143,7 @@ function delete_empty_files() {
 		echo "Directory $folder does not exist."
 	fi
 }
-	
+
 
 # A function to update the journal database:
 function git_commit_push() {
@@ -183,22 +207,7 @@ alias gpl="git pull"
 alias gph="git push"
 alias dot="cd $HOME/Documents/MacDotFiles"
 alias nilw="cd $NILWIZARD_DIR && venv"
-
-MANGOBIN=$HOME/bin; PATH=${MANGOBIN}:${PATH}; export PATH
-
-# LLVM:
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="$HOME/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-export NVIM_PYTHON_LOG_FILE="$HOME/logs/neovim_python.log"
-
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh
+alias nvimconfig="cd $HOME/.config/nvim && ll"
 
 # ZSH Vim Mode settings
 MODE_CURSOR_VIINS="#808080 blinking bar"
@@ -217,3 +226,85 @@ bindkey -r '\eb'
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Python/3.13/bin:$PATH"
+
+# OS Specific NVM setup:
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	# linux
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	# macOS
+	export NVM_DIR="/opt/homebrew/opt/nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+	  [ -s "$NVM_DIR/etc/bash_completion.d/nvm" ] && \. "$NVM_DIR/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+fi
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	# Remap Keys
+	# swap capslock and esc keys for quicker vim, because caps is useful only for communicating aggression on the internet. (but this is still important so we dont want to eliminate it entirely)
+	# setxkbmap -option caps:swapescape
+	# increase repetition rate on hold-key
+	# xset r rate 300 75
+
+	# Set ANTSPATH for linux:
+	export ANTSPATH=$HOME/Programs/ants-2.4.4/bin/
+	# ANTs
+	PATH=$HOME/Programs/ants-2.4.4/bin:$PATH
+	# DCM4CHE
+	PATH=$HOME/Programs/dcm4che-5.31.0/bin:$PATH
+	# Freesurfer
+	FREESURFER_HOME=/usr/local/freesurfer/7.4.1
+	# Only duck with freesurfer if its home directory actually exists:
+	if [ -d "$FREESURFER_HOME" ]; then
+		export FREESURFER_HOME
+		export FS_LICENSE=$FREESURFER_HOME/license.txt
+		source $FREESURFER_HOME/SetUpFreeSurfer.sh
+		# FastSurfer
+		export PYTHONPATH="${PYTHONPATH}:${HOME}/Programs/FastSurfer"
+	fi
+
+	export PATH=/home/physics/Programs/dcm2niix/bin:$PATH
+	export PATH=/home/physics/Programs/trackvis:$PATH
+	export PATH=/home/physics/Programs/dtk:$PATH
+
+	# auto-inserted by @update.afni.binaries :
+	export PATH=$PATH:/home/physics/abin
+
+	# auto-inserted by @update.afni.binaries :
+	#    set up tab completion for AFNI programs
+	if [ -f $HOME/.afni/help/all_progs.COMP.zsh ]; then
+	   autoload -U +X bashcompinit && bashcompinit
+	   autoload -U +X compinit && compinit \
+		  && source $HOME/.afni/help/all_progs.COMP.zsh
+	fi
+
+	# Check if "/opt/nvim-linux-x86_64/bin" exists, and if so add it to the PATH
+	if [ -d "/opt/nvim-linux-x86_64/bin" ]; then
+		export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
+	fi
+
+	source $HOME/Programs/zsh-autosuggestions/zsh-autosuggestions.zsh
+	source $HOME/Programs/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	# Check if the user-name is in the list of shared users, if not then run
+	# the personal user setup:
+	shared_users=("physics" "neuro")
+	if [[ ! " ${shared_users[@]} " =~ " $(whoami) " ]]; then
+		source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh
+	fi
+
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	source $HOME/Programs/zsh-autosuggestions/zsh-autosuggestions.zsh
+	source $HOME/Programs/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	# source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh
+fi
+
+# zsh-autosuggestion keybindings:
+# Use Ctrl+l to accept the autosuggestion:
+bindkey '^l' autosuggest-accept
+
+export nnUNet_raw="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_raw"
+export nnUNet_preprocessed="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_preprocessed"
+export nnUNet_results="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_results"
+
