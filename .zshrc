@@ -351,6 +351,8 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	shared_users=("physics" "neuro")
 	if [[ ! " ${shared_users[@]} " =~ " $(whoami) " ]]; then
 		source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh
+	else
+		alias vimode="source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
 	fi
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
