@@ -101,6 +101,15 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+### User ZSH Settings:
+# Enable extended history with timestamp:
+setopt EXTENDED_HISTORY
+# Share history between all sessions:
+setopt SHARE_HISTORY
+# Make history infinitely large:
+HISTSIZE=100000
+
+### Some OS/Workstation Specific settings:
 if [[ $OSTYPE == "linux-gnu"* ]]; then
 	# You may need to manually set your language environment
 	export LANG=en_US.UTF-8
@@ -186,6 +195,53 @@ schedule_entries_location="$HOME/Documents/MacDotFiles/schedule/schedules"
 if [[ -e $schedule_repo_location/make_new_schedule.sh ]]; then
 	alias "schedule"="cd $schedule_repo_location; git_pull $schedule_repo_location; cd $schedule_entries_location; nvim $($schedule_repo_location/make_new_schedule.sh $1) && delete_empty_files $schedule_entries_location && git_commit_push $schedule_entries_location 'Wrote to schedule' && exit"
 fi
+
+
+# Define a function that will return the path of the given file relative to the
+# repo root:
+function repo_relative_path() {
+	local file_path="$1"
+	# Check if the file exists:
+	if [ -f "$file_path" ]; then
+		# Get the absolute path of the file:
+		local abs_path=$(realpath "$file_path")
+		# Get the git repo root:
+		local repo_root=$(git -C "$(dirname "$abs_path")" rev-parse --show-toplevel 2> /dev/null)
+		# If the repo root was found, print the relative path:
+		if [ -n "$repo_root" ]; then
+			# local rel_path=$(realpath --relative-to="$repo_root" "$abs_path")
+			# ^ realpath cannot be used this way on macOS, so use parameter
+			# expansion instead:
+			local rel_path="${abs_path#$repo_root/}"
+			echo "$rel_path"
+		else
+			echo "Repo root not found for file $file_path." >&2
+			return 1
+		fi
+	else
+		echo "File $file_path does not exist." >&2
+	fi
+}
+# Make a function that runs "git show" using "repo_relative_path" to get the path
+# for the second argument:
+function git_show_rel() {
+	local branch_name
+	local file_path
+	branch_name="$1"
+	file_path="$2"
+	if [ -z "$branch_name" ] || [ -z "$file_path" ]; then
+		echo "Usage: git_show_rel <branch_name> <file_path>" >&2
+		return 1
+	fi
+	local rel_path
+	rel_path=$(repo_relative_path "$file_path")
+	if [ $? -ne 0 ]; then
+		return 1
+	fi
+	git show "$branch_name:$rel_path"
+}
+# Make and alias for the above function:
+alias gnab="git_show_rel"
 
 # Personal aliases
 alias ll="ls -la"
@@ -312,4 +368,3 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	export nnUNet_preprocessed="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_preprocessed"
 	export nnUNet_results="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_results"
 fi
-
