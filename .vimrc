@@ -90,7 +90,7 @@ let python_highlight_all=1
 syntax on
 
 let g:SimpylFold_docstring_preview=1
-let g:black_linelength=80
+let g:black_linelength=100
 
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 set t_Co=256
@@ -106,7 +106,7 @@ else
 endif
 
 set hlsearch
-set textwidth=80
+set textwidth=100
 set fo=cq  " dont autowrap text by default (add 't' flag to autowrap)
 set wrapmargin=0  " dont wrap based on terminal size
 set tabstop=4
@@ -249,74 +249,58 @@ let g:VeryMagicRange = 0  " (default is 0, search patterns in command ranges)
 let g:VeryMagicEscapeBackslashesInSearchArg = 0  " (default is 0, :edit +/{pattern}))
 let g:SortEditArgs = 0  " (default is 0, see below)
 
-" Codefmt
+" -------- Codefmt defaults  -------
 Glaive codefmt clang_format_style="file"
 Glaive codefmt js_beautify_executable="js-beautify"
-function! Format()
-    execute "FormatCode"
-    echoh "Formatted Code."
-endfunction
-autocmd FileType 
-    \bzl,c,cpp,proto,arduino,dart,go,gn,html,,css,sass,scss,less,json,java,python,rust,vue nnoremap 
-    \<buffer> <C-f> :call Format()<CR>
-" Modification for html-django
+
+" -------- Map <C-f> to the right formatter per filetype -----------------------
+" 1) For Python, use Black directly (this gives the multi-line call style you want)
+autocmd FileType python nnoremap <buffer> <C-f> :Black<CR>
+
+" 2) For Django/templated HTML, keep your custom formatter
 function! DjangoFormat()
-    let l:scrollHeight = winsaveview()
-    execute "Prettier"
-    silent! %s/\v\{\%/\{\% /ge
-    silent! %s/\v\{\%\s+/\{\% /ge
-    silent! %s/\v\%\}/ \%\}/ge
-    silent! %s/\v\s+\%\}/ \%\}/ge
-    silent! %s/\v\{\% extends/\{\% extends /ge
-    silent! %s/\v\{\% extends\s+/\{\% extends /ge
-    silent! %s/\v\{\% include/\{\% include /ge
-    silent! %s/\v\{\% include\s+/\{\% include /ge
-    silent! %s/\v\{\% load/\{\% load /ge
-    silent! %s/\v\{\% load\s+/\{\% load /ge
-    silent! %s/\v\{\% static/\{\% static /ge
-    silent! %s/\v\{\% static\s+/\{\% static /ge
-    silent! %s/\v\{\% comment/\{\% comment /ge
-    silent! %s/\v\{\% comment\s+/\{\% comment /ge
-    silent! %s/\v\{\% url/\{\% url /ge
-    silent! %s/\v\{\% url\s+/\{\% url /ge
-    silent! %s/\v\{\% cycle/\{\% cycle /ge
-    silent! %s/\v\{\% cycle\s+/\{\% cycle /ge
-    silent! %s/\v\{\% filter/\{\% filter /ge
-    silent! %s/\v\{\% filter\s+/\{\% filter /ge
-    silent! %s/\v\{\% firstof/\{\% firstof /ge
-    silent! %s/\v\{\% firstof\s+/\{\% firstof /ge
-    silent! %s/\v\{\% lorem/\{\% lorem /ge
-    silent! %s/\v\{\% lorem\s+/\{\% lorem /ge
-    silent! %s/\v\{\% now/\{\% now /ge
-    silent! %s/\v\{\% now\s+/\{\% now /ge
-    silent! %s/\v\{\% regroup/\{\% regroup /ge
-    silent! %s/\v\{\% regroup\s+/\{\% regroup /ge
-    silent! %s/\v\{\{/\{\{ /ge
-    silent! %s/\v\{\{\s+/\{\{ /ge
-    silent! %s/\v\}\}/ \}\}/ge
-    silent! %s/\v\s+\}\}/ \}\}/ge
-    execute "noh"
-    call winrestview(l:scrollHeight)
-    echom "Django HTML Code Formatted."
+  let l:view = winsaveview()
+  execute "Prettier"
+  silent! %s/\v\{\%/\{\% /ge
+  silent! %s/\v\{\%\s+/\{\% /ge
+  silent! %s/\v\%\}/ \%\}/ge
+  silent! %s/\v\s+\%\}/ \%\}/ge
+  silent! %s/\v\{\% extends/\{\% extends /ge
+  silent! %s/\v\{\% extends\s+/\{\% extends /ge
+  silent! %s/\v\{\% include/\{\% include /ge
+  silent! %s/\v\{\% include\s+/\{\% include /ge
+  silent! %s/\v\{\% load/\{\% load /ge
+  silent! %s/\v\{\% load\s+/\{\% load /ge
+  silent! %s/\v\{\% static/\{\% static /ge
+  silent! %s/\v\{\% static\s+/\{\% static /ge
+  silent! %s/\v\{\% comment/\{\% comment /ge
+  silent! %s/\v\{\% comment\s+/\{\% comment /ge
+  silent! %s/\v\{\% url/\{\% url /ge
+  silent! %s/\v\{\% url\s+/\{\% url /ge
+  silent! %s/\v\{\% cycle/\{\% cycle /ge
+  silent! %s/\v\{\% cycle\s+/\{\% cycle /ge
+  silent! %s/\v\{\% filter/\{\% filter /ge
+  silent! %s/\v\{\% filter\s+/\{\% filter /ge
+  silent! %s/\v\{\% firstof/\{\% firstof /ge
+  silent! %s/\v\{\% firstof\s+/\{\% firstof /ge
+  silent! %s/\v\{\% lorem/\{\% lorem /ge
+  silent! %s/\v\{\% lorem\s+/\{\% lorem /ge
+  silent! %s/\v\{\% now/\{\% now /ge
+  silent! %s/\v\{\% now\s+/\{\% now /ge
+  silent! %s/\v\{\% regroup/\{\% regroup /ge
+  silent! %s/\v\{\% regroup\s+/\{\% regroup /ge
+  silent! %s/\v\{\{/\{\{ /ge
+  silent! %s/\v\{\{\s+/\{\{ /ge
+  silent! %s/\v\}\}/ \}\}/ge
+  silent! %s/\v\s+\}\}/ \}\}/ge
+  nohlsearch
+  call winrestview(l:view)
+  echom "Django HTML Code Formatted."
 endfunction
 autocmd FileType htmldjango,javascript,jinja.html nnoremap <buffer> <C-f> :call DjangoFormat()<CR>
-" autocmd FileType htmldjango nnoremap <buffer> <C-f>gg=G<C-o>
-"
-" CodeFMT
-" augroup autoformat_settings
-"   autocmd FileType bzl AutoFormatBuffer buildifier
-"   autocmd FileType c,cpp,proto,arduino AutoFormatBuffer clang-format
-"   autocmd FileType javascript AutoFormatBuffer clang-format
-"   autocmd FileType dart AutoFormatBuffer dartfmt
-"   autocmd FileType go AutoFormatBuffer gofmt
-"   autocmd FileType gn AutoFormatBuffer gn
-"   autocmd FileType html,htmldjango,jinja.html,css,sass,scss,less,json AutoFormatBuffer js-beautify
-"   autocmd FileType java AutoFormatBuffer google-java-format
-  " autocmd FileType python AutoFormatBuffer yapf
-  " autocmd FileType python AutoFormatBuffer autopep8
-"   autocmd FileType rust AutoFormatBuffer rustfmt
-"   autocmd FileType vue AutoFormatBuffer prettier
-" augroup END
+
+" 3) For everything else, use codefmt’s command
+autocmd FileType bzl,c,cpp,proto,arduino,dart,go,gn,html,css,sass,scss,less,json,java,rust,vue nnoremap <buffer> <C-f> :AutoFormatBuffer<CR>
 
 " Syntastic
 let g:ycm_show_diagnostics_ui = 0
@@ -359,7 +343,7 @@ let g:airline_detect_spelllang=1
 let g:airline_detect_spell=1
 
 " Goyo:
-let g:goyo_width = 80
+let g:goyo_width = 100
 let g:goyo_height = '100%'
 
 

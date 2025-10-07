@@ -12,6 +12,7 @@ require "user.toggleterm"
 vim.g.copilot_workspace_folders = {
 	"~/Desktop/puppetlegion/puppetlegion/",
 	"~/Desktop/nil_wizard/modules/stealth_roi_extraction/",
+	"~/Desktop/brain_aneurysm_detection/challenge_repo/",
 }
 
 require "user.cmp"
