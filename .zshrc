@@ -353,6 +353,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 		source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh
 	else
 		alias vimode="source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
+		alias v="source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
 	fi
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -362,9 +363,14 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 if [[ $OSTYPE == "linux-gnu"* ]]; then
-	export nnUNet_raw="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_raw"
-	export nnUNet_preprocessed="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_preprocessed"
-	export nnUNet_results="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_results"
+	# export nnUNet_raw="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_raw"
+	# export nnUNet_preprocessed="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_preprocessed"
+	# export nnUNet_results="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_results"
+
+	export nnUNet_raw="/media/physics/DATADRIVE1/RSNA_Aneurysm_2025/nnUNet_data/nnUNet_raw"
+	export nnUNet_preprocessed="/media/physics/DATADRIVE1/RSNA_Aneurysm_2025/nnUNet_data/nnUNet_preprocessed"
+	export nnUNet_results="/media/physics/DATADRIVE1/RSNA_Aneurysm_2025/nnUNet_data/nnUNet_results"
+
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	export nnUNet_raw="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_raw"
 	export nnUNet_preprocessed="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_preprocessed"
