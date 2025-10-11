@@ -356,6 +356,17 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	fi
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
+	# auto-inserted by @update.afni.binaries :
+	export PATH=$PATH:$HOME/abin
+
+	# auto-inserted by @update.afni.binaries :
+	#    set up tab completion for AFNI programs
+	if [ -f $HOME/.afni/help/all_progs.COMP.zsh ]; then
+	   autoload -U +X bashcompinit && bashcompinit
+	   autoload -U +X compinit && compinit \
+		  && source $HOME/.afni/help/all_progs.COMP.zsh
+	fi
+
 	source $HOME/Programs/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	# source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh
@@ -370,3 +381,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	export nnUNet_preprocessed="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_preprocessed"
 	export nnUNet_results="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_results"
 fi
+
+export PATH=${PATH}:/opt/homebrew/opt/python/libexec/bin
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export R_LIBS=/Users/gml/sw/R-4.3.1
