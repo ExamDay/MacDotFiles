@@ -376,13 +376,14 @@ if [[ $OSTYPE == "linux-gnu"* ]]; then
 	export nnUNet_raw="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_raw"
 	export nnUNet_preprocessed="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_preprocessed"
 	export nnUNet_results="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_results"
+
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	export nnUNet_raw="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_raw"
 	export nnUNet_preprocessed="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_preprocessed"
 	export nnUNet_results="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_results"
+
+	export PATH=${PATH}:/opt/homebrew/opt/python/libexec/bin
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+	export R_LIBS=$HOME/sw/R-4.3.1
 fi
 
-export PATH=${PATH}:/opt/homebrew/opt/python/libexec/bin
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
-export R_LIBS=/Users/gml/sw/R-4.3.1
