@@ -1,3 +1,5 @@
+# This stops freesurfer from printin its directory every time a new shell is opened:
+export FS_FREESURFERENV_NO_OUTPUT=1
 # This stops oh-my-zsh from prompting for updates (cuts off the first letter of
 # first prompts otherwise)
 DISABLE_AUTO_UPDATE="true"
@@ -359,6 +361,16 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	source $HOME/Programs/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	# source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh
+
+	# Freesurfer
+	FREESURFER_HOME=/Applications/freesurfer/8.1.0/
+	# Only duck with freesurfer if its home directory actually exists:
+	if [ -d "$FREESURFER_HOME" ]; then
+		export FREESURFER_HOME
+		export FS_LICENSE=$FREESURFER_HOME/license.txt
+		source $FREESURFER_HOME/SetUpFreeSurfer.sh
+	fi
+
 fi
 
 if [[ $OSTYPE == "linux-gnu"* ]]; then
