@@ -1,8 +1,12 @@
 # This stops oh-my-zsh from prompting for updates (cuts off the first letter of
 # first prompts otherwise)
 DISABLE_AUTO_UPDATE="true"
+# Sets the strategy for zsh-autosuggestions:
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)  # (this first checks the history, then the completions)
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+#
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -276,12 +280,33 @@ MODE_CURSOR_SEARCH="#800080 steady underline"
 KEYTIMEOUT=1
 # Disable the "execute" mode in vim-mode:
 VIM_MODE_EXECUTE_BINDINGS=()
+# Disavle the "z" and "Z" bindings in normal mode
 
 # Remove the "Esc-b" Emacs binding as it conflicts with vim-mode:
 bindkey -r '\eb'
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Python/3.13/bin:$PATH"
+
+# OS Specific nnUNet setup:
+if [[ $OSTYPE == "linux-gnu"* ]]; then
+	# export nnUNet_raw="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_raw"
+	# export nnUNet_preprocessed="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_preprocessed"
+	# export nnUNet_results="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_results"
+
+	export nnUNet_raw="/media/physics/DATADRIVE1/RSNA_Aneurysm_2025/nnUNet_data/nnUNet_raw"
+	export nnUNet_preprocessed="/media/physics/DATADRIVE1/RSNA_Aneurysm_2025/nnUNet_data/nnUNet_preprocessed"
+	export nnUNet_results="/media/physics/DATADRIVE1/RSNA_Aneurysm_2025/nnUNet_data/nnUNet_results"
+
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	export nnUNet_raw="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_raw"
+	export nnUNet_preprocessed="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_preprocessed"
+	export nnUNet_results="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_results"
+
+	export PATH=${PATH}:/opt/homebrew/opt/python/libexec/bin
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+	export R_LIBS=$HOME/sw/R-4.3.1
+fi
 
 # OS Specific NVM setup:
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
@@ -297,6 +322,14 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	# PostgreSQL 18:
 	export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
 fi
+
+function unbind_vicmd_keys() {
+	# This is for unbinding certain keys in the vicmd keymap when zsh-vim-mode is
+	# enabled, because they conflict with my muscle memory from using vim:
+	bindkey -M vicmd ':' undefined-key
+	bindkey -M vicmd 'z' undefined-key
+	bindkey -M vicmd 'Z' undefined-key
+}
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	# Remap Keys
@@ -345,15 +378,16 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 		export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
 	fi
 
+	source $HOME/Programs/zsh-autosuggestions/zsh-autosuggestions.zsh
 	source $HOME/Programs/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	# Check if the user-name is in the list of shared users, if not then run
 	# the personal user setup:
 	shared_users=("physics" "neuro")
 	if [[ ! " ${shared_users[@]} " =~ " $(whoami) " ]]; then
-		source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh
+		source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh && unbind_vicmd_keys
 	else
-		alias vimode="source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
-		alias v="source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
+		alias vimode="source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh && unbind_vicmd_keys"
+		alias v="vimode"
 	fi
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -368,27 +402,13 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 		  && source $HOME/.afni/help/all_progs.COMP.zsh
 	fi
 
+	source $HOME/Programs/zsh-autosuggestions/zsh-autosuggestions.zsh
 	source $HOME/Programs/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	# source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-	source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh
+	source $HOME/Programs/zsh-vim-mode/zsh-vim-mode.plugin.zsh && unbind_vicmd_keys
 fi
 
-if [[ $OSTYPE == "linux-gnu"* ]]; then
-	# export nnUNet_raw="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_raw"
-	# export nnUNet_preprocessed="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_preprocessed"
-	# export nnUNet_results="$HOME/mri_image_processing/rsna_iad/nnUNet_data/nnUNet_results"
-
-	export nnUNet_raw="/media/physics/DATADRIVE1/RSNA_Aneurysm_2025/nnUNet_data/nnUNet_raw"
-	export nnUNet_preprocessed="/media/physics/DATADRIVE1/RSNA_Aneurysm_2025/nnUNet_data/nnUNet_preprocessed"
-	export nnUNet_results="/media/physics/DATADRIVE1/RSNA_Aneurysm_2025/nnUNet_data/nnUNet_results"
-
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-	export nnUNet_raw="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_raw"
-	export nnUNet_preprocessed="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_preprocessed"
-	export nnUNet_results="$HOME/Desktop/rsna_iad_challenge/nnUNet_data/nnUNet_results"
-
-	export PATH=${PATH}:/opt/homebrew/opt/python/libexec/bin
-	eval "$(/opt/homebrew/bin/brew shellenv)"
-	export R_LIBS=$HOME/sw/R-4.3.1
-fi
+# zsh-autosuggestion keybindings:
+# Use Ctrl+l to accept the autosuggestion:
+bindkey '^l' autosuggest-accept
 
