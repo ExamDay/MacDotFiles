@@ -67,6 +67,7 @@ Plugin 'elubow/cql-vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required for Vundle
 filetype plugin indent on    " required for SimpliFold
+
 call glaive#Install()
 " Optional Enable codefmt's default mappings on the <Leader>= prefix.
 " Glaive codefmt plugin[mappings]
@@ -114,7 +115,7 @@ set shiftwidth=0
 set noexpandtab
 imap <Caps> <Esc>
 map <leader>o :setlocal spell! spelllang=en_us<CR>
-let g:prettier#config#use_tabs = 'true'
+let g:prettier#config#use_tabs = 'false' | let g:prettier#config#tab_width = 2
 
 "Python formatting shortcut
 nnoremap  :Black<CR>
@@ -201,13 +202,14 @@ au BufNewFile, BufRead *.py, *.js, *.c, *.cpp, *.h, *.json, *.java, *.bash, *.sh
     \ set fileformat=unix |
 	\ let g:prettier#config#tab_width=4
 
-"Proper indentation for WebDev languages
-au BufNewFile, BufRead *.html, *.css, *.sass, *.scss
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set autoindent |
-    \ set fileformat=unix |
-	\ let g:prettier#config#tab_width=2
+""" Now handled by .vim/after/ftplugin/*.vim files:
+" "Proper indentation for WebDev languages
+" au BufNewFile, BufRead *.html, *.css, *.sass, *.scss
+"     \ set tabstop=2 |
+"     \ set softtabstop=2 |
+"     \ set autoindent |
+"     \ set fileformat=unix |
+"     \ let g:prettier#config#tab_width=2
 
 "flag extraneous white space
 au BufRead, BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/

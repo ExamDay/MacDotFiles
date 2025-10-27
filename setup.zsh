@@ -53,6 +53,13 @@ ln -s $HOME/Documents/MacDotFiles/.config/nvim/lua/user/plugins.lua $HOME/.confi
 ln -s $HOME/Documents/MacDotFiles/.config/nvim/lua/user/cmp.lua $HOME/.config/nvim/lua/user/cmp.lua
 ln -s $HOME/Documents/MacDotFiles/.config/nvim/lua/user/toggleterm.lua $HOME/.config/nvim/lua/user/toggleterm.lua
 
+# Make the ~/.vim/after/ftplugin stuff:
+mkdir -p $HOME/.vim/after/ftplugin
+ln -s $HOME/Documents/MacDotFiles/.vim/after/ftplugin/html.vim $HOME/.vim/after/ftplugin/html.vim
+ln -s $HOME/Documents/MacDotFiles/.vim/after/ftplugin/htmldjango.vim $HOME/.vim/after/ftplugin/htmldjango.vim
+ln -s $HOME/Documents/MacDotFiles/.vim/after/ftplugin/jinja_html.vim $HOME/.vim/after/ftplugin/jinja_html.vim
+ln -s $HOME/Documents/MacDotFiles/.vim/after/ftplugin/css.vim $HOME/.vim/after/ftplugin/css.vim
+
 # At this point you need to go into
 # $HOME/.config/nvim/lua/user/plugins.lua and do :w twice to
 # install all the neovim plugins...
