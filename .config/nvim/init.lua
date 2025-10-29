@@ -73,3 +73,21 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile", "BufWinEnter" }, {
   callback = toggle_copilot,
 })
 ----------------------------------------------------------------
+
+vim.keymap.set('n', '<leader>d', function()
+  vim.cmd('update')
+  local root = project_root()
+  vim.fn.jobstart(
+    { 'python3.13', 'manage.py', 'shell', '-c', 'import data_explorer.viz_dev as v; v.deploy()' },
+    {
+      cwd = root,
+      stdout_buffered = true,
+      on_stdout = function(_, data)
+        if data then vim.notify(table.concat(data, '\n'), vim.log.levels.INFO, { title = 'deploy' }) end
+      end,
+      on_stderr = function(_, data)
+        if data then vim.notify(table.concat(data, '\n'), vim.log.levels.ERROR, { title = 'deploy' }) end
+      end,
+    }
+  )
+end, { desc = 'Deploy viz_dev (async)' })

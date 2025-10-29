@@ -423,3 +423,5 @@ fi
 # Use Ctrl+l to accept the autosuggestion:
 bindkey '^l' autosuggest-accept
 
+alias gstar="git ls-files --others --exclude-standard"
+   
